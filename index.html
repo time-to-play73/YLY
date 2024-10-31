@@ -8,12 +8,10 @@
 </head>
 <body>
     <div class="game-container">
-        <!-- استبدال النص بالصورة -->
         <img src="YLY.jpg" alt="Learn How to Learn" class="game-title-image">
 
         <div id="timer">Time left: <span id="timeLeft">60</span>s</div>
 
-        <!-- المربعات الفارغة لكل كلمة -->
         <div class="words-container">
             <div class="word-box" data-word="LEARN1"></div>
             <div class="word-box" data-word="HOW"></div>
@@ -21,7 +19,6 @@
             <div class="word-box" data-word="LEARN2"></div>
         </div>
 
-        <!-- شبكة الأحرف -->
         <div class="grid"></div>
 
         <div class="button-container">
@@ -31,7 +28,7 @@
 
     <div id="popup" class="popup">
         <div class="popup-content">
-            <p>Congratulations! You've completed the puzzle!</p>
+            <p>Bello: You won! 🏆 Get ready for the 'Learn How to Learn' session! Prepare for cinema surprises! 🎬</p>
             <button id="closePopup">Close</button>
         </div>
     </div>
@@ -55,7 +52,6 @@
         let timer;
         let selectedCells = [];
 
-        // إعداد المؤقت الزمني وتحديثه
         const startTimer = () => {
             timer = setInterval(() => {
                 timeLeft--;
@@ -69,10 +65,8 @@
             }, 1000);
         };
 
-        // بدء المؤقت عند تحميل الصفحة
         startTimer();
 
-        // تعبئة الشبكة بالأحرف
         cellsData.forEach(letter => {
             const cell = document.createElement('div');
             cell.classList.add('cell');
@@ -81,12 +75,10 @@
             grid.appendChild(cell);
         });
 
-        // عند النقر على خلية
         grid.addEventListener('click', (e) => {
             const cell = e.target;
             if (!cell.classList.contains('cell') || cell.classList.contains('selected')) return;
 
-            // تأكد من أن الخلية مجاورة
             if (selectedCells.length > 0 && !isAdjacent(selectedCells[selectedCells.length - 1], cell)) {
                 alert("Please select adjacent letters only!");
                 clearSelection();
@@ -98,7 +90,6 @@
             checkSelection();
         });
 
-        // التحقق من تجميع الكلمات بشكل صحيح
         const checkSelection = () => {
             const selectedWord = selectedCells.map(cell => cell.dataset.letter).join('');
             wordBoxes.forEach(box => {
@@ -118,15 +109,16 @@
                     box.classList.add('completed');
                     selectedCells = [];
                 }
-                // تحقق من اكتمال جميع الكلمات
+                
                 if ([...wordBoxes].every(box => box.classList.contains('completed'))) {
                     clearInterval(timer);
-                    popup.classList.add('show');
+                    setTimeout(() => {
+                        popup.classList.add('show');
+                    }, 1000);
                 }
             });
         };
 
-        // إضافة حركة انتقالية عند اكتمال الكلمة
         const animateWordCompletion = (box, selectedCells) => {
             selectedCells.forEach((cell, index) => {
                 cell.classList.add('move-to-box');
@@ -140,7 +132,6 @@
             });
         };
 
-        // التحقق من أن الخلية مجاورة
         const isAdjacent = (cell1, cell2) => {
             const cell1Index = [...grid.children].indexOf(cell1);
             const cell2Index = [...grid.children].indexOf(cell2);
@@ -152,15 +143,12 @@
             return Math.abs(row1 - row2) + Math.abs(col1 - col2) === 1;
         };
 
-        // إلغاء تحديد الحروف في حال الخطأ
         const clearSelection = () => {
             selectedCells.forEach(cell => cell.classList.remove('selected'));
             selectedCells = [];
         };
 
-        // إعادة تعيين اللعبة
         const resetGame = () => {
-            // إعادة تحميل الصفحة
             location.reload();
         };
 
