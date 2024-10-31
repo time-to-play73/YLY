@@ -1,0 +1,155 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e6f7ff;
+    background-image: linear-gradient(to right, #ffffff, #b3e0ff);
+    color: #003366;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.game-container {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(0, 102, 204, 0.5);
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+    overflow-y: auto; /* Allow vertical scrolling if needed */
+}
+
+.game-title-image {
+    width: 80%; /* تحديد عرض الصورة */
+    max-width: 300px; /* تحديد أقصى عرض للصورة */
+    height: auto; /* الحفاظ على نسبة العرض إلى الارتفاع */
+    margin-bottom: 20px; /* مسافة بين الصورة والعناصر الأخرى */
+}
+
+#timer {
+    font-size: 1.5em;
+    color: #004080;
+    margin-bottom: 20px;
+}
+
+.words-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.word-box {
+    width: 100px;
+    height: 60px;
+    border: 2px solid #0088cc;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8em;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #004080;
+    transition: background-color 0.3s, transform 0.3s, color 0.3s;
+}
+
+.word-box.completed {
+    background-color: #66ccff;
+    border-color: #005f7f;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0px 0px 15px #66ccff;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.cell {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 119, 204, 0.2);
+    border: 2px solid #0077cc;
+    border-radius: 10px;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.cell.selected {
+    background-color: #80d0ff;
+}
+
+.button-container {
+    margin-top: 20px;
+}
+
+.game-button {
+    background-color: #005f7f;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.game-button:hover {
+    background-color: #0077cc;
+    transform: scale(1.05);
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup.show {
+    display: flex;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+}
+
+#closePopup {
+    margin-top: 10px;
+    background-color: #005f7f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#closePopup:hover {
+    background-color: #0077cc;
+}
+
+/* حركة انتقالية عند اكتمال الكلمة */
+.cell.move-to-box {
+    transform: scale(1.5);
+}
